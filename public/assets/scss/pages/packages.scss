@@ -1,0 +1,169 @@
+.packages {
+    padding: 24px;
+    border: 1px solid $__dull__ash;
+    box-shadow: $__box__shadow;
+    margin-top: 30px;
+    &.package-selected {
+        margin: 0;
+        padding: 39px 24px;
+        border-radius: 24px;
+        background: $__primarycolor;
+        h6, h4, p, h2, ul li, ul li i {
+            color: $__white;
+        }
+        .package-header {
+            h6 {
+                color: $__white;
+            }
+            .btn-action-icon {
+                &:hover {
+                    border-color: $__white;
+                }
+            }
+        }
+        .btn-primary {
+            background: $__white;
+            border-color: $__white;
+            color:  $__primarycolor;
+            &:hover {
+                box-shadow: inset 0 50px 0 0 $__primarycolor;
+                border-color: $__white;
+                color: $__white;
+            }
+        }
+    }
+    .package-header {
+        margin-bottom: 15px;
+        .icon-frame {
+            background: $__primary__light__blue;
+            min-width: 70px;
+            width: 70px;
+            height: 70px;
+            display: inline-block;
+            border-radius: 16px;
+            margin-right: 18px;
+            @include respond-below(custom1199){
+                min-width: 50px;
+                height: 50px;
+                img {
+                    width: 25px;
+                }
+            }
+            @include respond-below(custom1199){
+                min-width: 70px;
+                height: 70px;
+                img {
+                    width: 38px;
+                }
+            }
+        }
+        h6 {
+            color: $__gray__white__light;
+            margin-bottom: 5px;
+        }
+        h4 {
+            font-weight: $__bold;
+            @include respond-below(custom1199){
+                font-size: $__font__size__20;
+            }
+            @include respond-below(custom991){
+                font-size: $__font__size__24;
+            }
+        }
+        .btn-action-icon {
+            min-width: 30px;
+            height: 30px;
+            background: $__smoke__white;
+            border-radius: $__full__width;
+            @include transition(all 0.5s ease);
+            @extend %flex-align-center;
+            i {
+                color: $__gray__white__light;
+            }
+            &:hover {
+                background: $__primarycolor;
+                border-color: $__primarycolor;
+                i {
+                    color:  $__white;
+                }
+            }
+        }
+    }
+    p {
+        font-size: $__font__size__14;
+        color: $__gray__white__light;
+    }
+    h2 {
+        margin: 24px 0;
+        font-size: font__size__48;
+        font-weight: $__bold;
+        
+    }
+    h6 {
+        font-weight: $__semibold;
+        margin-bottom: 18px;
+    }
+    ul{
+        li {
+            color: $__gray__white__light;
+            margin-bottom: 14px;
+            i {
+                color: $__primarycolor;
+                margin-right: 8px;
+                font-size: $__font__size__16;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .active-btn {
+        margin-top: 34px;
+        a {
+            font-size: $__font__size__16;
+        }
+    }
+}
+#add_newpackage {
+    .modal-dialog {
+        max-width: 800px; 
+    }
+    h6 {
+        margin-bottom: 20px;
+    }
+    form {
+        .checkboxes {
+            @include  margin-padding(0 0 24px 0,0 0 14px 0);
+            border-bottom: 1px solid $__light__vampire;
+            @extend %flex-wrap;
+            li {
+                margin-right: 40px;
+                margin-bottom: 10px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                label {
+                    @extend %flex-align-center;
+                    margin: 0;
+                    input {
+                        border: 1px solid $__cloud__grays;
+                        min-width: 18px;
+                        height: 18px;
+                        margin-right: 10px;
+                        font-size: $__font__size__16;
+                        &:checked {
+                            accent-color: $__primarycolor;
+                            border-color: #592AC6;
+                        }
+                    }
+                }
+            }
+        }
+        .status-toggle {
+            margin-left: 24px;
+            .checktoggle {
+                transform: translate(0);
+            }
+        }
+    }
+}

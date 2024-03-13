@@ -1,0 +1,181 @@
+.bg-subscribe{
+    background-color: $__bg__danger__light;
+    color:$__text__danger__light;
+    @include  margin-padding(null,4px 10px);
+    @include rounded(4px);
+}
+.bg-payment{
+    background-color: $__bg__info__blue;
+    color:$__info__payment;
+    @include  margin-padding(null,4px 10px);
+    @include rounded(4px);
+}
+.btn-primary .fa-plus{
+    margin-right: 5px;
+}
+.import-company .btn-import{
+    color:$__primarycolor ;
+    border: 1px solid $__primarycolor;
+    &:hover{
+        background-color:  $__primarycolor;
+        color: $__white;
+    }
+}
+.companies-table .table tbody td h2.table-avatar a {
+    color: $__info__companies;
+}
+.companies-table .table tbody td h2 span {
+    color: $__primary__companies;
+}
+.card-table .companies-table .table td {
+    color: $__info__companies;
+}
+.companies-table  .dropdown-item .far.fa-trash-alt{
+    border-bottom: 1px soild $__cloud__grays;
+}
+.page-content .list-btn .btn-filters {
+    &:hover{
+   background-color:  $__bg__primary__light;
+    }
+}
+.companies-table .table .dropdown-menu {
+    width: 176px;
+}
+.companies-table .table p{
+    color: $__primary__companies;
+}
+.avatar-img.rounded-circle .company{
+    height: 40px;
+    width: 40px; 
+}
+.companies-table .table tbody td h2.table-avatar .companies{
+    height: 40px;
+    width: 40px;
+    display: $__inline__block;
+    
+}
+.p-20 {
+    .modal-header {
+        padding: 20px;
+    }
+    .modal-body, .modal-footer {
+        padding: 0 20px 20px 20px;
+    }
+}
+#add_package {
+    .modal-body {
+        h6 {
+            color: $__gray__white__light;
+            margin-bottom: 10px;
+        }
+        ul {
+            margin: 0;
+            border: $__none;
+            background: $__cylindrical;
+            border-radius: 10px;
+            li {
+                @include respond-below(custom767){
+                    padding-right: 0;
+                    padding-left: 0;
+                }
+                &:first-child {
+                    padding-left: 0;
+                }
+                &:last-child {
+                    padding-right: 0;
+                }
+                h6 {
+                    padding: 13px 0;
+                    margin-bottom: 0;
+                    border-radius: 10px;
+                    border: $__none;
+                    cursor: pointer;
+                    color: $__gray;
+                    font-size: $__font__size__16;
+                    font-weight: $__medium;
+                    &.active, &:hover {
+                        background: $__primarycolor;
+                        color: $__white;
+                    }
+                }
+            }
+        }
+        .tab-content {
+            .form-check {
+                padding-left: 0;
+                label {
+                   border: 1px solid $__cloud__grays;
+                   border-radius: 10px;
+                   padding: 10px 10px 10px 30px;
+                   cursor: pointer;
+                   width: $__full__width;
+                   margin-bottom: 10px;
+                   input {
+                        min-width: 18px;
+                        height: 18px;
+                        position: $__relative;
+                        flex-shrink: 0;
+                        cursor: pointer;
+                        margin-right: 12px;
+                        &:after {
+                            position: $__absolute;
+                            left: 50%;
+                            top: 50%;
+                            @include transform(translate(-50%, -50%));
+                            content: '';
+                            width: 12px;
+                            height: 12px;
+                            border-radius: 8px;
+                            background: $__primarycolor;
+                            display: none;
+                        }
+                        &:focus {
+                            box-shadow: none;
+                        }
+                        &:checked {
+                            background: transparent;
+                            border-color: $__primarycolor;
+                            &:after {
+                                display: block;
+                            }
+                        }
+                    }
+                    .text-dark {
+                        font-weight: $__medium;
+                    }
+                }
+            }
+        }
+        
+    }
+}
+.bootstrap-datetimepicker-widget{
+    .timepicker { 
+        td {
+            a {
+                padding: 0;
+                span {
+                    padding: 0;
+                    &:hover {
+                        background: $__secondarycolor;
+                    }
+                }
+            }
+        } 
+    }
+    .datepicker {
+        th, td { 
+            text-align: center;
+            padding: 5px 6px;
+            font-size: 12px;
+        }
+        td {
+            &.active {
+                background: $__primarycolor;
+                &:hover {
+                    background: $__secondarycolor;
+                }
+            }
+        }
+    }
+}
