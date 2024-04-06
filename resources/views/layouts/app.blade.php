@@ -436,9 +436,11 @@
 <script src="{{ asset('assets/js/theme-settings.js') }}"></script>
 <script src="{{ asset('assets/js/greedynav.js') }}"></script>
 
-@yield('script')
 <!-- Custom JS -->
 <script src="{{ asset('assets/js/script.js') }}"></script>
+
+@yield('script')
+
 
 </body>
 </html>
