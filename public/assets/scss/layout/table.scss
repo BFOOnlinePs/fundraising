@@ -99,11 +99,11 @@
                 display: $__inline__block;
                 &:hover {
                     color: $__primarycolor;
-                } 
+                }
             }
         }
      }
-     
+
     .invoice-link {
         color: $__gray__dark;
         display: inline-block;
@@ -197,7 +197,7 @@
 .table.no-border > tfoot > tr > td,
 .table.no-border > tfoot > tr > th,
 .table.no-border > thead > tr > td,
-.table.no-border > thead > tr > th { 
+.table.no-border > thead > tr > th {
     @include margin-padding(null, 10px 8px);
 }
 
@@ -216,7 +216,7 @@
     }
     td{
         border-color: rgba(0, 0, 0, 0.05);
-        &:first-child{  
+        &:first-child{
             border-top-left-radius: 0 !important;
             border-bottom-left-radius: 0 !important;
         }
@@ -231,7 +231,7 @@
 
 .card-table {
     .card-body {
-        @include margin-padding(null, 0  !important);        
+        @include margin-padding(null, 0  !important);
         .table {
             > thead {
                 > tr {
@@ -252,7 +252,7 @@
                 box-shadow: none;
                 vertical-align: middle;
                 &:first-child{
-                    padding-left: 25px; 
+                    padding-left: 25px;
                 }
             }
             th {
@@ -263,7 +263,7 @@
                 font-size: $__font__size__14;;
                 color: $__heading__color;
                 &:first-child{
-                    padding-left: 25px; 
+                    padding-left: 25px;
                 }
             }
         }
@@ -273,7 +273,7 @@
 .table>:not(:first-child) {
 	border: 0;
 }
- 
+
 .dataTables_length select {
     appearance: $__auto;
 }
@@ -305,7 +305,7 @@
 		}
 	}
 }
- 
+
 .dataTables_length select {
     appearance: auto;
 }
@@ -324,7 +324,7 @@ table {
     tbody {
         td {
             a {
-                color: #0052ea;
+                color: #fff !important;
                 &.action-icon{
                     color: #333;
                 }
@@ -390,18 +390,18 @@ table {
     *::-webkit-scrollbar {
         height: 7px;
     }
-     
+
     *::-webkit-scrollbar-track {
         background: #e9e9ea;
         border-radius: 0;
     }
-      
+
     *::-webkit-scrollbar-thumb {
         /*background-color: #DBECFF; */
         background-color: #DDCEFF;
         border-radius: 0;
     }
-     
+
     * {
         scrollbar-color: #D3D3D3 #e9e9ea;
         scrollbar-width: thin

@@ -9,7 +9,7 @@
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;
-    @include margin-padding(null, 8px 15px);
+    //@include margin-padding(null, 8px 15px);
     &:hover {
         -webkit-transition: all 0.5s;
         -moz-transition: all 0.5s;
@@ -122,13 +122,13 @@
         border-color: $__primarycolor;
     }
 }
-.btn-check:focus+.btn-primary, 
+.btn-check:focus+.btn-primary,
 .btn-primary:focus {
     box-shadow: $__none !important;
 }
 .btn{
     &:focus{
-        box-shadow: $__none !important; 
+        box-shadow: $__none !important;
     }
     &.btn-greys{
         background: $__white__smoke;
