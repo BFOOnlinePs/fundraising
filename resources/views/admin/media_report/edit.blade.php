@@ -18,19 +18,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Arabic title</label>
-                                            <textarea type="text" class="form-control" name="title_ar" rows="1" placeholder="Arabic title">{{ $data->title_ar }}</textarea>
+                                            <textarea type="text" dir="rtl" class="form-control" name="title_ar" rows="4" placeholder="ضع عنوان">{{ $data->title_ar }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">English title</label>
-                                            <textarea type="text" class="form-control" name="title_en" rows="1" placeholder="English title">{{ $data->title_en }}</textarea>
+                                            <textarea type="text" class="form-control" name="title_en" rows="4" placeholder="English title">{{ $data->title_en }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mt-2">
                                             <label for="">Arabic media report</label>
-                                            <textarea class="form-control" name="media_report_content_ar" id="" cols="30" placeholder="English media report" rows="2">{{ $data->media_report_content_ar }}</textarea>
+                                            <textarea required class="form-control" dir="rtl" name="media_report_content_ar" id="" cols="30" placeholder="اكتب وصف" rows="2">{{ $data->media_report_content_ar }}</textarea>
                                             {{--                                <div class="summernote" id="summernote">--}}
 
                                             {{--                                </div>--}}
@@ -69,8 +69,10 @@
                                     <br>
                                     @if(!empty($data->main_photo))
                                         <img style="width: 200px" src="{{ asset('storage/media_report/'.$data->main_photo) }}" alt="">
+                                    @else
+                                        <p style="font-size: 100px"><span class="fa fa-image"></span></p>
                                     @endif
-                                    <input type="file" name="main_photo" class="form-control">
+                                    <input required type="file" name="main_photo" class="form-control">
                                 </div>
                             </div>
                         </div>

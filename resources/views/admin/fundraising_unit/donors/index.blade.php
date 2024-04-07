@@ -13,11 +13,11 @@
 {{--                    <button type="button" class="btn btn-rounded btn-primary">Donors list</button>--}}
                     <a href="{{ route('fundraising_unit.donors.donors_category.index') }}" type="button" class="btn btn-rounded btn-success">Donors category</a>
                     <a href="#" id="send-email" class="btn btn-rounded btn-success">Send email</a>
-{{--                    <form action="{{ route('fundraising_unit.donors.import_donors_to_excel') }}" method="post" enctype="multipart/form-data">--}}
-{{--                        @csrf--}}
-{{--                        <input type="file" name="donors_file">--}}
-{{--                        <button type="submit" class="btn btn-rounded btn-success">Import Excel</button>--}}
-{{--                    </form>--}}
+                    <form action="{{ route('fundraising_unit.donors.import_donors_to_excel') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="donors_file">
+                        <button type="submit" class="btn btn-rounded btn-success">Import Excel</button>
+                    </form>
                 </div>
             </div>
         </div>
