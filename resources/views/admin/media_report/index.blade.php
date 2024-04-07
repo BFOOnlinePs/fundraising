@@ -2,6 +2,8 @@
 @section('style')
 @endsection
 @section('content')
+    @include('alert_message.success')
+    @include('alert_message.fail')
     <div class="row mt-2">
         <div class="col-md-12">
             <div class="card">

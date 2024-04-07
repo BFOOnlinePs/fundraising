@@ -23,6 +23,8 @@
                     <td>
                         @if(auth()->user()->user_role == 1)
                             <a href="{{ route('media_report.edit',['id'=>$key->id]) }}" class="btn btn-dark btn-sm"><span class="fa fa-edit"></span></a>
+                        @elseif(auth()->user()->user_role == 3)
+                            <a href="{{ route('media_report.edit',['id'=>$key->id]) }}" class="btn btn-dark btn-sm"><span class="fa fa-edit"></span></a>
                         @elseif(auth()->user()->user_role == 4)
                             <a href="{{ route('media_report.details',['id'=>$key->id]) }}" class="btn btn-dark btn-sm"><span class="fa fa-search"></span></a>
                         @endif

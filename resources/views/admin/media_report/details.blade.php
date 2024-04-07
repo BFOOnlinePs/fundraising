@@ -59,8 +59,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button @if($data->status != 'pending') disabled @endif class="mt-2 btn btn-success" name="submit" value="approved">Approved</button>
-                        <button @if($data->status != 'pending') disabled @endif class="mt-2 btn btn-danger" name="submit" value="not_approved">Not approved</button>
+                        @if(auth()->user()->user_role == 4)
+                            <button @if($data->status != 'pending') disabled @endif class="mt-2 btn btn-success" name="submit" value="approved">Approved</button>
+                            <button @if($data->status != 'pending') disabled @endif class="mt-2 btn btn-danger" name="submit" value="not_approved">Not approved</button>
+                        @endif
                     </form>
                 </div>
             </div>

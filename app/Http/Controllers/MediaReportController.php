@@ -107,10 +107,10 @@ class MediaReportController extends Controller
                 }
             }
 
-            return redirect()->route('media_report.index')->with(['success'=>'Media report updated successfully']);
+            return redirect()->route('media_report.edit',['id'=>$request->id])->with(['success'=>'Media report updated successfully']);
         }
         else{
-            return redirect()->route('media_report.index')->with(['fail'=>'There was an error updating the media report']);
+            return redirect()->route('media_report.edit',['id'=>$request->id])->with(['fail'=>'There was an error updating the media report']);
         }
     }
 
