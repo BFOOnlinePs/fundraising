@@ -72,3 +72,8 @@ Route::group(['middleware'=>'auth'],function (){
         Route::post('attachment_ajax',[App\Http\Controllers\MediaReportController::class , 'attachment_ajax'])->name('media_report.attachment_ajax');
     });
 });
+
+
+Route::get('/generate', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+});
