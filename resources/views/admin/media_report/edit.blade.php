@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
 @endsection
 @section('content')
+    @include('alert_message.success')
+    @include('alert_message.fail')
     <div class="row mt-2">
         <div class="col-md-12">
             <div class="card">
