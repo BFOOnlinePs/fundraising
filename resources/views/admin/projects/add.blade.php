@@ -101,6 +101,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="">Beneficiary type</label>
+                                    ( <a href="{{ route('settings.type_of_beneficiaries.add') }}">Add Beneficiary</a> )
                                     @error('beneficiary_id')
                                     (<span class="text-danger">{{ $message }}</span>)
                                     @enderror
@@ -115,6 +116,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="">Currency</label>
+                                    ( <a href="{{ route('settings.currency.add') }}">Add Currency</a> )
                                     @error('currency_id')
                                     (<span class="text-danger">{{ $message }}</span>)
                                     @enderror
