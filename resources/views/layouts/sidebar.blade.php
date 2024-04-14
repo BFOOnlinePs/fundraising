@@ -10,13 +10,13 @@
                     <li class="submenu">
                         <a href="#"><i class="fe fe-home"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a class="active" href="index.html">Admin Dashboard</a></li>
+                            <li><a class="@if(request()->routeIs('home')) active @endif" href="{{ route('home') }}">Admin Dashboard</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
                         <a href="#"><i class="fe fe-home"></i> <span> Users</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a class="active" href="{{ route('users.index') }}">Users list</a></li>
+                            <li><a class="" href="{{ route('users.index') }}">Users list</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
@@ -69,6 +69,13 @@
                         <a href="#"><i class="fe fe-grid"></i> <span> Media Report</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{ route('media_report.index') }}">Media Report</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-grid"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{ route('projects.index') }}">Projects</a></li>
+                            <li><a href="{{ route('project_activity.index') }}">Project Activity</a></li>
                         </ul>
                     </li>
                 @elseif(auth()->user()->user_role == 4)
