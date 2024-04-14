@@ -59,6 +59,17 @@
     </style>
 @endsection
 @section('content')
+    @include('alert_message.success')
+    @include('alert_message.fail')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row mt-2">
         <div class="col-md-12">
             <div class="card">
