@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('settings.type_of_beneficiaries.add') }}" class="btn btn-primary waves-effect waves-light mt-1">Add Place
+                    <a href="{{ route('settings.type_of_beneficiaries.add') }}" class="btn btn-primary waves-effect waves-light mt-1">Add Beneficiaries
                     </a>
                 </div>
                 <div class="card-body">

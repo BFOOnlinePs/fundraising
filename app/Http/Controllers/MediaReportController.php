@@ -27,7 +27,7 @@ class MediaReportController extends Controller
 
         // Employee
         if (auth()->user()->user_role == 3){
-            $query->where();
+            $query->where('user_id',auth()->user()->id);
         }
         $data = $query->get();
         return response()->json([
@@ -53,6 +53,7 @@ class MediaReportController extends Controller
         $data->project_id = $request->project_id;
         $data->activity_id = $request->activity_id;
         $data->notes = $request->notes;
+        $data->user_id = auth()->user()->id;
 
         if ($request->hasFile('main_photo')) {
             $file = $request->file('main_photo');

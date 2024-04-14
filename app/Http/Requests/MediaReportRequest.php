@@ -28,8 +28,8 @@ class MediaReportRequest extends FormRequest
             'title_en' => 'required',
             'media_report_content_ar' => 'required',
             'media_report_content_en' => 'required',
-            'main_photo' => 'required|image|mimes:jpg|max:10000', // Adjusted max size to 10MB (10000 KB)
-            'images.*' => 'image|mimes:jpg,jpeg,png|max:100000',
+//            'main_photo' => 'required|image|mimes:jpg|max:10000', // Adjusted max size to 10MB (10000 KB)
+//            'images.*' => 'image|mimes:jpg,jpeg,png|max:100000',
         ];
     }
 
