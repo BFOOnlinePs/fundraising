@@ -95,6 +95,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group mt-2">
                                             <label for="">Project</label>
+                                            ( <a href="{{ route('projects.add') }}">Add Project</a> )
                                             <select required class="form-control" onchange="get_activites_if_selected_project_ajax(this.value)" name="project_id" id="project_select">
                                                 <option value="">Select project ...</option>
                                                 @foreach($projects as $key)

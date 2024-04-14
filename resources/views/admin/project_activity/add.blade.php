@@ -14,6 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="">Project</label>
+                                    ( <a href="{{ route('projects.add') }}">Add Project</a> )
                                     @error('project_id')
                                     (<span class="text-danger">{{ $message }}</span>)
                                     @enderror
@@ -28,6 +29,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="">Activity</label>
+                                    ( <a href="{{ route('activity.add') }}">Add Activity</a> )
                                     @error('activity_id')
                                     (<span class="text-danger">{{ $message }}</span>)
                                     @enderror
