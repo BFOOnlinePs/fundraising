@@ -21,8 +21,8 @@ class ActivityController extends Controller
         $data = new ActivityModel();
         $data->activity_name_ar = $request->activity_name_ar;
         $data->activity_name_en = $request->activity_name_en;
-        $data->activity_descripttion_ar = $request->activity_descripttion_ar;
-        $data->activity_descripttion_en = $request->activity_descripttion_en;
+        $data->activity_description_ar = $request->activity_description_ar;
+        $data->activity_description_en = $request->activity_description_en;
         if ($data->save()){
             return redirect()->route('activity.index')->with(['success' => 'Data added successfully']);
         }
@@ -40,8 +40,8 @@ class ActivityController extends Controller
         $data = ActivityModel::where('id',$request->id)->first();
         $data->activity_name_ar = $request->activity_name_ar;
         $data->activity_name_en = $request->activity_name_en;
-        $data->activity_descripttion_ar = $request->activity_descripttion_ar;
-        $data->activity_descripttion_en = $request->activity_descripttion_en;
+        $data->activity_description_ar = $request->activity_description_ar;
+        $data->activity_description_en = $request->activity_description_en;
         if ($data->save()){
             return redirect()->route('activity.index')->with(['success' => 'Data updated successfully']);
         }

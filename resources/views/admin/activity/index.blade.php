@@ -34,10 +34,10 @@
                                             <tr>
                                                 <td>{{ $key->activity_name_ar }}</td>
                                                 <td>{{ $key->activity_name_en }}</td>
-                                                <td>{{ $key->activity_descripttion_ar }}</td>
-                                                <td>{{ $key->activity_descripttion_en }}</td>
+                                                <td>{{ $key->activity_description_ar }}</td>
+                                                <td>{{ $key->activity_description_en }}</td>
                                                 <td>
-                                                    <a href="" class="btn btn-sm btn-success"><span class="fa fa-edit"></span></a>
+                                                    <a href="{{ route('activity.edit',['id'=>$key->id]) }}" class="btn btn-sm btn-success"><span class="fa fa-edit"></span></a>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -114,6 +114,13 @@ Route::group(['middleware'=>'auth'],function (){
         Route::get('edit/{id}',[App\Http\Controllers\ActivityController::class , 'edit'])->name('activity.edit');
         Route::post('update',[App\Http\Controllers\ActivityController::class , 'update'])->name('activity.update');
     });
+    Route::group(['prefix'=>'project_activity'],function (){
+        Route::get('index',[App\Http\Controllers\ProjectActivityController::class , 'index'])->name('project_activity.index');
+        Route::get('add',[App\Http\Controllers\ProjectActivityController::class , 'add'])->name('project_activity.add');
+        Route::post('create',[App\Http\Controllers\ProjectActivityController::class , 'create'])->name('project_activity.create');
+        Route::get('edit/{id}',[App\Http\Controllers\ProjectActivityController::class , 'edit'])->name('project_activity.edit');
+        Route::post('update',[App\Http\Controllers\ProjectActivityController::class , 'update'])->name('project_activity.update');
+    });
     Route::post('/upload/image',[App\Http\Controllers\UploadController::class , 'upload'])->name('upload.image');
 });
 
