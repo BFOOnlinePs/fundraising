@@ -98,6 +98,7 @@ Route::group(['middleware'=>'auth'],function (){
         Route::post('approved_media_report',[App\Http\Controllers\MediaReportController::class , 'approved_media_report'])->name('media_report.approved_media_report');
         Route::post('delete_image_ajax',[App\Http\Controllers\MediaReportController::class , 'delete_image_ajax'])->name('media_report.delete_image_ajax');
         Route::post('attachment_ajax',[App\Http\Controllers\MediaReportController::class , 'attachment_ajax'])->name('media_report.attachment_ajax');
+        Route::post('get_activites_if_selected_project_ajax',[App\Http\Controllers\MediaReportController::class , 'get_activites_if_selected_project_ajax'])->name('media_report.get_activites_if_selected_project_ajax');
     });
     Route::group(['prefix'=>'projects'],function (){
         Route::get('index',[App\Http\Controllers\ProjectsController::class , 'index'])->name('projects.index');

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MediaReportRequest;
+use App\Models\ActivityModel;
 use App\Models\AttachmentModel;
 use App\Models\MediaReportModel;
+use App\Models\ProjectActivityModel;
+use App\Models\ProjectsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -29,8 +32,9 @@ class MediaReportController extends Controller
     }
 
     public function add(){
+        $projects = ProjectsModel::get();
         $media_officers = User::where('user_role',4)->get();
-        return view('admin.media_report.add',['media_officers'=>$media_officers]);
+        return view('admin.media_report.add',['media_officers'=>$media_officers,'projects'=>$projects]);
     }
 
     public function create(MediaReportRequest $request)
@@ -41,6 +45,9 @@ class MediaReportController extends Controller
         $data->media_report_content_ar = $request->media_report_content_ar;
         $data->media_report_content_en = $request->media_report_content_en;
         $data->status = 'pending';
+        $data->project_id = $request->project_id;
+        $data->activity_id = $request->activity_id;
+        $data->notes = $request->notes;
 
         if ($request->hasFile('main_photo')) {
             $file = $request->file('main_photo');
@@ -77,9 +84,10 @@ class MediaReportController extends Controller
         }
     }
     public function edit($id){
+        $projects = ProjectsModel::get();
         $data = MediaReportModel::where('id',$id)->first();
         $attachments = AttachmentModel::where('media_report_id',$id)->get();
-        return view('admin.media_report.edit',['data'=>$data,'attachments'=>$attachments]);
+        return view('admin.media_report.edit',['data'=>$data,'attachments'=>$attachments,'projects'=>$projects]);
     }
 
     public function update(Request $request){
@@ -89,6 +97,9 @@ class MediaReportController extends Controller
         $data->media_report_content_ar = $request->media_report_content_ar;
         $data->media_report_content_en = $request->media_report_content_en;
         $data->status = 'pending';
+        $data->project_id = $request->project_id;
+        $data->activity_id = $request->activity_id;
+        $data->notes = $request->notes;
 
         // Update the main photo if a new one is uploaded
         if ($request->hasFile('main_photo')) {
@@ -172,6 +183,17 @@ class MediaReportController extends Controller
         return response()->json([
             'success' => 'true',
             'view' => view('admin.media_report.ajax.list_image_ajax',['data'=>$data])->render()
+        ]);
+    }
+
+    public function get_activites_if_selected_project_ajax(Request $request){
+        $data = ProjectActivityModel::where('project_id',$request->project_id)->get();
+        foreach ($data as $key){
+            $key->activity = ActivityModel::where('id',$key->activity_id)->first();
+        }
+        return response()->json([
+            'success' => 'true',
+            'data' => $data
         ]);
     }
 }

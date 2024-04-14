@@ -68,6 +68,31 @@
                                             <textarea class="form-control" name="media_report_content_en" id="" cols="30" placeholder="English media report" rows="2">{{ $data->media_report_content_en }}</textarea>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-2">
+                                            <label for="">Project</label>
+                                            <select required class="form-control" onchange="get_activites_if_selected_project_ajax(this.value)" name="project_id" id="project_select">
+                                                <option value="">Select project ...</option>
+                                                @foreach($projects as $key)
+                                                    <option @if($data->project_id == $key->id) selected @endif value="{{ $key->id }}">{{ $key->project_name_en }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-2">
+                                            <label for="">Activity</label>
+                                            <select required disabled class="form-control" name="activity_id" id="activity_select">
+                                                <option value="">Select activity ...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mt-2">
+                                            <label for="">Notes</label>
+                                            <textarea name="notes" id="" cols="30" rows="2" placeholder="Notes" class="form-control">{{ $data->notes }}</textarea>
+                                        </div>
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -110,6 +135,7 @@
         $(document).ready(function () {
             media_report_table_ajax();
             attachment_ajax({{ $data->id }});
+            get_activites_if_selected_project_ajax({{ $data->project_id }});
         });
         function media_report_table_ajax() {
             $.ajaxSetup({
@@ -126,6 +152,42 @@
                 },
                 success:function(data){
                     $('#media_report_table_ajax').html(data.view);
+                },
+                error:function(){
+
+                }
+            })
+        }
+
+        function get_activites_if_selected_project_ajax(project_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "POST",
+                url: "{{ route('media_report.get_activites_if_selected_project_ajax') }}",
+                datatype:'json',
+                data:{
+                    'project_id' : project_id
+                },
+                success:function(response){
+                    if(response.success == 'true'){
+                        if(response.data.length > 0){
+                            var activities = response.data;
+                            $.each(activities, function (key,value) {
+                                $('#activity_select').append(`<option value="${value.activity.id}">${value.activity.activity_name_en}</option>`);
+                            })
+
+                            $('#activity_select').prop('disabled', false);
+                            $('#activity_select').val({{ $data->activity_id }});
+                        }
+                        else{
+                            $('#activity_select').empty();
+                            $('#activity_select').prop('disabled', true);
+                        }
+                    }
                 },
                 error:function(){
 
