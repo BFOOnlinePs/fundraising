@@ -1,22 +1,27 @@
 <div class="header header-one">
     <a href="index.html"  class="d-inline-flex d-sm-inline-flex align-items-center d-md-inline-flex d-lg-none align-items-center device-logo">
-        <img src="{{ asset('assets/img/logo.png') }}" class="img-fluid logo2" alt="Logo">
+        <img src="{{ asset('img/logo.png') }}" class="img-fluid logo2" alt="Logo">
+{{--        <img src="{{ asset('assets/img/logo.png') }}" class="img-fluid logo2" alt="Logo">--}}
     </a>
     <div class="main-logo d-inline float-start d-lg-flex align-items-center d-none d-sm-none d-md-none">
         <div class="logo-white">
             <a href="index.html">
-                <img src="{{ asset('assets/img/logo-full-white.png') }}" class="img-fluid logo-blue" alt="Logo">
+                <img src="{{ asset('img/logo.png') }}" class="img-fluid logo-blue" alt="Logo">
+{{--                <img src="{{ asset('assets/img/logo-full-white.png') }}" class="img-fluid logo-blue" alt="Logo">--}}
             </a>
             <a href="index.html">
-                <img src="{{ asset('assets/img/logo-small-white.png') }}" class="img-fluid logo-small" alt="Logo">
+                <img src="{{ asset('img/logo.png') }}" class="img-fluid logo-small" alt="Logo">
+{{--                <img src="{{ asset('assets/img/logo-small-white.png') }}" class="img-fluid logo-small" alt="Logo">--}}
             </a>
         </div>
-        <div class="logo-color">
+        <div class="logo-color m-4">
             <a href="index.html">
-                <img src="{{ asset('assets/img/logo.png') }}" class="img-fluid logo-blue" alt="Logo">
+                <img src="{{ asset('img/logo.png') }}" class="img-fluid logo-blue" alt="Logo">
+{{--                <img src="{{ asset('assets/img/logo.png') }}" class="img-fluid logo-blue" alt="Logo">--}}
             </a>
             <a href="index.html">
-                <img src="{{ asset('assets/img/logo-small.png') }}" class="img-fluid logo-small" alt="Logo">
+                <img src="{{ asset('img/logo.png') }}" class="img-fluid logo-small" alt="Logo">
+{{--                <img src="{{ asset('assets/img/logo-small.png') }}" class="img-fluid logo-small" alt="Logo">--}}
             </a>
         </div>
     </div>

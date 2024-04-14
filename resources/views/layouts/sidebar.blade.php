@@ -45,6 +45,7 @@
                         <a href="#"><i class="fe fe-grid"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{ route('projects.index') }}">Projects</a></li>
+                            <li><a href="{{ route('project_activity.index') }}">Project Activity</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
