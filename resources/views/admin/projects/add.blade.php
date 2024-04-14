@@ -13,6 +13,14 @@
             </ul>
         </div>
     @endif
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-around">
+            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project Info</a>
+            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project location</a>
+            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project Activity</a>
+            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project Beneficiary</a>
+        </div>
+    </div>
     <div class="row mt-2">
         <div class="col-md-12">
             <div class="card">
