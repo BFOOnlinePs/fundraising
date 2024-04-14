@@ -4,6 +4,21 @@
 @endsection
 @section('style')
     <style>
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         /*.preview-item {*/
         /*    margin-right: 10px;*/
         /*    width: 20px; !* Adjust as needed *!*/
@@ -26,6 +41,21 @@
             padding: 2px;
             border-radius: 50%;
         }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 @endsection
 @section('content')
@@ -41,7 +71,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Arabic title</label>
-                                            <textarea required dir="rtl" type="text" class="form-control" name="title_ar" rows="4" placeholder="ضع عنوان"></textarea>
+                                            <textarea  dir="rtl" type="text" class="form-control" name="title_ar" rows="4" placeholder="ضع عنوان"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -54,17 +84,6 @@
                                         <div class="form-group mt-2">
                                             <label for="">Arabic media report</label>
                                             <textarea required class="form-control" dir="rtl" name="media_report_content_ar" id="" cols="30" placeholder="اكتب وصف" rows="2"></textarea>
-                                            {{--                                <div class="summernote" id="summernote">--}}
-
-                                            {{--                                </div>--}}
-                                            {{--                                <textarea name="" id="summernote" cols="30" rows="10"></textarea>--}}
-                                            {{--                                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--}}
-
-                                            {{--                                <script>--}}
-                                            {{--                                    $(document).ready(function() {--}}
-                                            {{--                                        $('#summernote').summernote();--}}
-                                            {{--                                    });--}}
-                                            {{--                                </script>--}}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -96,6 +115,20 @@
             </div>
         </div>
     </div>
+    <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="" class="img-fluid" alt="Image Preview" id="preview-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('script')
 
@@ -128,6 +161,7 @@
             })
         }
 
+
         $(document).ready(function() {
             $('#image-input').on('change', function() {
                 const files = $(this)[0].files;
@@ -141,33 +175,86 @@
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
                     const reader = new FileReader();
+                    const loader = $('<div>').addClass('loader col-md-3 d-flex justify-content-center align-items-center custom-container').text('Loading...'); // Add loader
 
-                    reader.onload = function(e) {
-                        const removeBtn = $('<span>').addClass('remove-btn text-danger').html('&times;');
-                        const img = $('<img>').attr('src', e.target.result).attr('width','250px');
-                        const previewItem = $('<div>').addClass('preview-item').addClass('col-md-3').append(removeBtn, img);
-
-                        // Assign data attribute to remove button
-                        $(removeBtn).attr('data-index', i);
-
-                        removeBtn.on('click', function() {
-                            const index = $(this).attr('data-index');
-                            $(this).closest('.preview-item').remove();
-                            // Remove corresponding file from cloned input
-                            const fileName = files[index].name;
-                            const clonedInput = $('#image-input-clone')[0];
-                            $(clonedInput).val(''); // Clear cloned input value
-                            const files = clonedInput.files;
-                            for (let j = 0; j < files.length; j++) {
-                                if (files[j].name !== fileName) {
-                                    $(clonedInput).prop('files').push(files[j]); // Add back other files
-                                }
-                            }
-                        });
-
-                        previewContainer.append(previewItem);
+                    reader.onloadstart = function() {
+                        previewContainer.append(loader); // Show loader when loading starts
                     };
 
+                    reader.onload = function(e) {
+                        loader.remove(); // Remove loader when loading is complete
+                        const removeBtn = $('<span>').addClass('remove-btn text-danger').html('&times;');
+                        const img = new Image();
+
+                        img.onload = function() {
+                            // Create a canvas element
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+
+                            // Set the maximum width and height for the resized image
+                            const maxWidth = 250;
+                            const maxHeight = 250;
+
+                            // Calculate the new dimensions while maintaining aspect ratio
+                            let width = img.width;
+                            let height = img.height;
+
+                            if (width > maxWidth || height > maxHeight) {
+                                const aspectRatio = width / height;
+                                if (width > height) {
+                                    width = maxWidth;
+                                    height = maxWidth / aspectRatio;
+                                } else {
+                                    height = maxHeight;
+                                    width = maxHeight * aspectRatio;
+                                }
+                            }
+
+                            // Set the canvas dimensions
+                            canvas.width = width;
+                            canvas.height = height;
+
+                            // Draw the image onto the canvas
+                            ctx.drawImage(img, 0, 0, width, height);
+
+                            // Convert the canvas content to a data URL with compression
+                            const quality = 0.6; // Adjust compression quality (0.6 is an example)
+                            const compressedDataURL = canvas.toDataURL('image/jpeg', quality);
+
+                            // Create an img element with the compressed image
+                            const compressedImg = $('<img>').attr('src', compressedDataURL).addClass('img-preview');
+
+                            // Create the preview item with the remove button and compressed image
+                            const previewItem = $('<div>').addClass('preview-item col-md-3').append(removeBtn, compressedImg);
+
+                            // Assign data attribute to remove button
+                            $(removeBtn).attr('data-index', i);
+
+                            // Add click event listener to remove button
+                            removeBtn.on('click', function() {
+                                const index = $(this).attr('data-index');
+                                $(this).closest('.preview-item').remove();
+                                // Remove corresponding file from cloned input
+                                const fileName = files[index].name;
+                                const clonedInput = $('#image-input-clone')[0];
+                                $(clonedInput).val(''); // Clear cloned input value
+                                const files = clonedInput.files;
+                                for (let j = 0; j < files.length; j++) {
+                                    if (files[j].name !== fileName) {
+                                        $(clonedInput).prop('files').push(files[j]); // Add back other files
+                                    }
+                                }
+                            });
+
+                            // Append the preview item to the preview container
+                            previewContainer.append(previewItem);
+                        };
+
+                        // Set the src attribute of the image to the data URL
+                        img.src = e.target.result;
+                    };
+
+                    // Read the file as a data URL
                     reader.readAsDataURL(file);
                 }
 
@@ -176,6 +263,13 @@
                 $(this).after(clonedInput);
                 // Clear the file input to allow selecting additional images
                 $(this).val('');
+            });
+
+            // Add click event listener to dynamically generated images
+            $(document).on('click', '.img-preview', function() {
+                const src = $(this).attr('src');
+                $('#preview-image').attr('src', src);
+                $('#standard-modal').modal('show');
             });
         });
     </script>
