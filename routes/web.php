@@ -58,6 +58,34 @@ Route::group(['middleware'=>'auth'],function (){
             Route::post('update',[App\Http\Controllers\RegionController::class , 'update'])->name('settings.region.update');
             Route::post('region_table_ajax',[App\Http\Controllers\RegionController::class , 'region_table_ajax'])->name('settings.region.region_table_ajax');
         });
+        Route::group(['prefix'=>'currency'],function (){
+            Route::get('index',[App\Http\Controllers\CurrencyController::class , 'index'])->name('settings.currency.index');
+            Route::get('add',[App\Http\Controllers\CurrencyController::class , 'add'])->name('settings.currency.add');
+            Route::post('create',[App\Http\Controllers\CurrencyController::class , 'create'])->name('settings.currency.create');
+            Route::get('edit/{id}',[App\Http\Controllers\CurrencyController::class , 'edit'])->name('settings.currency.edit');
+            Route::post('update',[App\Http\Controllers\CurrencyController::class , 'update'])->name('settings.currency.update');
+        });
+        Route::group(['prefix'=>'cites'],function (){
+            Route::get('index',[App\Http\Controllers\CitesController::class , 'index'])->name('settings.cites.index');
+            Route::get('add',[App\Http\Controllers\CitesController::class , 'add'])->name('settings.cites.add');
+            Route::post('create',[App\Http\Controllers\CitesController::class , 'create'])->name('settings.cites.create');
+            Route::get('edit/{id}',[App\Http\Controllers\CitesController::class , 'edit'])->name('settings.cites.edit');
+            Route::post('update',[App\Http\Controllers\CitesController::class , 'update'])->name('settings.cites.update');
+        });
+        Route::group(['prefix'=>'places'],function (){
+            Route::get('index',[App\Http\Controllers\PlacesController::class , 'index'])->name('settings.places.index');
+            Route::get('add',[App\Http\Controllers\PlacesController::class , 'add'])->name('settings.places.add');
+            Route::post('create',[App\Http\Controllers\PlacesController::class , 'create'])->name('settings.places.create');
+            Route::get('edit/{id}',[App\Http\Controllers\PlacesController::class , 'edit'])->name('settings.places.edit');
+            Route::post('update',[App\Http\Controllers\PlacesController::class , 'update'])->name('settings.places.update');
+        });
+        Route::group(['prefix'=>'type_of_beneficiaries'],function (){
+            Route::get('index',[App\Http\Controllers\TypeOfBeneficiariesController::class , 'index'])->name('settings.type_of_beneficiaries.index');
+            Route::get('add',[App\Http\Controllers\TypeOfBeneficiariesController::class , 'add'])->name('settings.type_of_beneficiaries.add');
+            Route::post('create',[App\Http\Controllers\TypeOfBeneficiariesController::class , 'create'])->name('settings.type_of_beneficiaries.create');
+            Route::get('edit/{id}',[App\Http\Controllers\TypeOfBeneficiariesController::class , 'edit'])->name('settings.type_of_beneficiaries.edit');
+            Route::post('update',[App\Http\Controllers\TypeOfBeneficiariesController::class , 'update'])->name('settings.type_of_beneficiaries.update');
+        });
     });
     Route::group(['prefix'=>'media_report'],function (){
         Route::get('index',[App\Http\Controllers\MediaReportController::class , 'index'])->name('media_report.index');
@@ -71,8 +99,23 @@ Route::group(['middleware'=>'auth'],function (){
         Route::post('delete_image_ajax',[App\Http\Controllers\MediaReportController::class , 'delete_image_ajax'])->name('media_report.delete_image_ajax');
         Route::post('attachment_ajax',[App\Http\Controllers\MediaReportController::class , 'attachment_ajax'])->name('media_report.attachment_ajax');
     });
+    Route::group(['prefix'=>'projects'],function (){
+        Route::get('index',[App\Http\Controllers\ProjectsController::class , 'index'])->name('projects.index');
+        Route::post('project_table_ajax',[App\Http\Controllers\ProjectsController::class , 'project_table_ajax'])->name('projects.project_table_ajax');
+        Route::get('add',[App\Http\Controllers\ProjectsController::class , 'add'])->name('projects.add');
+        Route::post('create',[App\Http\Controllers\ProjectsController::class , 'create'])->name('projects.create');
+        Route::get('edit/{id}',[App\Http\Controllers\ProjectsController::class , 'edit'])->name('projects.edit');
+        Route::post('update',[App\Http\Controllers\ProjectsController::class , 'update'])->name('projects.update');
+    });
+    Route::group(['prefix'=>'activity'],function (){
+        Route::get('index',[App\Http\Controllers\ActivityController::class , 'index'])->name('activity.index');
+        Route::get('add',[App\Http\Controllers\ActivityController::class , 'add'])->name('activity.add');
+        Route::post('create',[App\Http\Controllers\ActivityController::class , 'create'])->name('activity.create');
+        Route::get('edit/{id}',[App\Http\Controllers\ActivityController::class , 'edit'])->name('activity.edit');
+        Route::post('update',[App\Http\Controllers\ActivityController::class , 'update'])->name('activity.update');
+    });
+    Route::post('/upload/image',[App\Http\Controllers\UploadController::class , 'upload'])->name('upload.image');
 });
-
 
 Route::get('/generate', function () {
     \Illuminate\Support\Facades\Artisan::call('storage:link');

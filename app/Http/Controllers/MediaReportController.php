@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MediaReportRequest;
 use App\Models\AttachmentModel;
 use App\Models\MediaReportModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class MediaReportController extends Controller
 {
@@ -28,13 +33,15 @@ class MediaReportController extends Controller
         return view('admin.media_report.add',['media_officers'=>$media_officers]);
     }
 
-    public function create(Request $request){
+    public function create(MediaReportRequest $request)
+    {
         $data = new MediaReportModel();
         $data->title_ar = $request->title_ar;
         $data->title_en = $request->title_en;
         $data->media_report_content_ar = $request->media_report_content_ar;
         $data->media_report_content_en = $request->media_report_content_en;
         $data->status = 'pending';
+
         if ($request->hasFile('main_photo')) {
             $file = $request->file('main_photo');
             $extension = $file->getClientOriginalExtension();
@@ -42,26 +49,33 @@ class MediaReportController extends Controller
             $file->storeAs('media_report', $filename, 'public');
             $data->main_photo = $filename;
         }
-        if ($data->save()){
+
+        if ($data->save()) {
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     $attachment = new AttachmentModel();
                     $extension = $image->getClientOriginalExtension();
                     $filename = time() . '_' . rand(1000,9999) . '.' . $extension;
-                    $image->storeAs('attachments', $filename, 'public');
+
+                    // Resize and save the image using Intervention Image
+                    $resizedImage = Image::make($image)->resize(800, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->encode($extension); // Adjust the resize dimensions as needed
+
+                    // Store the resized image
+                    Storage::put('public/media_report/' . $filename, $resizedImage->__toString());
 
                     $attachment->media_report_id = $data->id; // Assuming there's a foreign key relationship
                     $attachment->file = $filename;
                     $attachment->save();
                 }
             }
-            return redirect()->route('media_report.index')->with(['success'=>'تم اضافة التقرير بنجاح']);
-        }
-        else{
-            return redirect()->route('media_report.index')->with(['fail'=>'هناك خلل ما لم يتم اضافة التقرير']);
+
+            return redirect()->route('media_report.index')->with(['success' => 'تم اضافة التقرير بنجاح']);
+        } else {
+            return redirect()->route('media_report.index')->with(['fail' => 'هناك خلل ما لم يتم اضافة التقرير']);
         }
     }
-
     public function edit($id){
         $data = MediaReportModel::where('id',$id)->first();
         $attachments = AttachmentModel::where('media_report_id',$id)->get();

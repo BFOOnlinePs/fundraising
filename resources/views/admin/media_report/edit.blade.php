@@ -2,6 +2,24 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
 @endsection
+@section('style')
+    <style>
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+@endsection
 @section('content')
     @include('alert_message.success')
     @include('alert_message.fail')
@@ -55,9 +73,9 @@
                                             <div class="col-md-12">
                                                 <div class="form-group mt-2">
                                                     <label for="">Attachment</label>
-                                                    <input type="file" class="form-control" id="image-input" name="images[]" multiple accept="image/*">
+                                                    <input @if(empty($data->main_photo)) required @endif type="file" class="form-control" id="image-input" name="images[]" multiple accept="image/*">
                                                 </div>
-                                                <div class="preview-container" id="image-preview"></div>
+                                                <div class="preview-container row" id="image-preview"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +90,7 @@
                                     @else
                                         <p style="font-size: 100px"><span class="fa fa-image"></span></p>
                                     @endif
-                                    <input required type="file" name="main_photo" class="form-control">
+                                    <input type="file" name="main_photo" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -114,6 +132,71 @@
                 }
             })
         }
+
+        $(document).ready(function() {
+            $('#image-input').on('change', function() {
+                const files = $(this)[0].files;
+                const previewContainer = $('#image-preview');
+
+                if (files.length === 0) {
+                    console.log('No files selected.');
+                    return; // No files selected, exit the function
+                }
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    const loader = $('<div>').addClass('loader col-md-3').text('Loading...'); // Add loader
+
+                    reader.onloadstart = function() {
+                        previewContainer.append(loader); // Show loader when loading starts
+                    };
+
+                    reader.onload = function(e) {
+                        loader.remove(); // Remove loader when loading is complete
+                        const removeBtn = $('<span>').addClass('remove-btn text-danger').html('&times;');
+                        const img = $('<img>').attr('src', e.target.result).attr('width', '250px').addClass('img-preview');
+                        const previewItem = $('<div>').addClass('preview-item').addClass('col-md-3').append(removeBtn, img);
+
+                        // Assign data attribute to remove button
+                        $(removeBtn).attr('data-index', i);
+
+                        removeBtn.on('click', function() {
+                            const index = $(this).attr('data-index');
+                            $(this).closest('.preview-item').remove();
+                            // Remove corresponding file from cloned input
+                            const fileName = files[index].name;
+                            const clonedInput = $('#image-input-clone')[0];
+                            $(clonedInput).val(''); // Clear cloned input value
+                            const files = clonedInput.files;
+                            for (let j = 0; j < files.length; j++) {
+                                if (files[j].name !== fileName) {
+                                    $(clonedInput).prop('files').push(files[j]); // Add back other files
+                                }
+                            }
+                        });
+
+                        previewContainer.append(previewItem);
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+
+                // Clone the input field and hide the original
+                const clonedInput = $(this).clone().attr('id', 'image-input-clone').hide();
+                $(this).after(clonedInput);
+                // Clear the file input to allow selecting additional images
+                $(this).val('');
+            });
+
+            // Add click event listener to dynamically generated images
+            $(document).on('click', '.img-preview', function() {
+                const src = $(this).attr('src');
+                $('#preview-image').attr('src', src);
+                $('#standard-modal').modal('show');
+            });
+        });
+
 
         {{--$(document).ready(function() {--}}
         {{--    // Storing existing attachments--}}

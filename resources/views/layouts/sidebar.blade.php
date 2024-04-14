@@ -29,12 +29,6 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-grid"></i> <span> Settings</span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a href="{{ route('settings.region.index') }}">Region</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu">
                         <a href="#"><i class="fe fe-grid"></i> <span> Team</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="#">All Staff</a></li>
@@ -45,6 +39,28 @@
                         <a href="#"><i class="fe fe-grid"></i> <span> Media Report</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{ route('media_report.index') }}">Media Report</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-grid"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{ route('projects.index') }}">Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-grid"></i> <span> Activity</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{ route('activity.index') }}">Activity</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-grid"></i> <span> Settings</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="{{ route('settings.region.index') }}">Region</a></li>
+                            <li><a href="{{ route('settings.cites.index') }}">Cites</a></li>
+                            <li><a href="{{ route('settings.places.index') }}">Places</a></li>
+                            <li><a href="{{ route('settings.currency.index') }}">Currencies</a></li>
+                            <li><a href="{{ route('settings.type_of_beneficiaries.index') }}">Types of beneficiaries</a></li>
                         </ul>
                     </li>
                 @elseif(auth()->user()->user_role == 3)
