@@ -24,6 +24,11 @@ class MediaReportController extends Controller
 
     public function media_report_table_ajax(Request $request){
         $query = MediaReportModel::query();
+
+        // Employee
+        if (auth()->user()->user_role == 3){
+            $query->where();
+        }
         $data = $query->get();
         return response()->json([
             'success' => 'true',
