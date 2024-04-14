@@ -14,12 +14,6 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-home"></i> <span> Users</span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a class="" href="{{ route('users.index') }}">Users list</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu">
                         <a href="#"><i class="fe fe-grid"></i> <span> Fundraising unit</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{ route('fundraising_unit.donors.index') }}">Donors</a></li>
@@ -31,7 +25,7 @@
                     <li class="submenu">
                         <a href="#"><i class="fe fe-grid"></i> <span> Team</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a href="#">All Staff</a></li>
+                            <li><a href="{{ route('users.index') }}">All Staff</a></li>
                             <li><a href="calendar.html">Staff groups</a></li>
                         </ul>
                     </li>
@@ -45,13 +39,8 @@
                         <a href="#"><i class="fe fe-grid"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{ route('projects.index') }}">Projects</a></li>
-                            <li><a href="{{ route('project_activity.index') }}">Project Activity</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu">
-                        <a href="#"><i class="fe fe-grid"></i> <span> Activity</span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
                             <li><a href="{{ route('activity.index') }}">Activity</a></li>
+                            <li><a href="{{ route('project_activity.index') }}">Project Activity</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
@@ -75,6 +64,7 @@
                         <a href="#"><i class="fe fe-grid"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="{{ route('projects.index') }}">Projects</a></li>
+                            <li><a href="{{ route('activity.index') }}">Activity</a></li>
                             <li><a href="{{ route('project_activity.index') }}">Project Activity</a></li>
                         </ul>
                     </li>
