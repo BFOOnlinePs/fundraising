@@ -229,7 +229,7 @@
         </div>
         <button style="" type="submit" class="mt-2 btn btn-success">Save</button>
     </form>
-
+{{--    Mohamad Maraqa--}}
     <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -442,7 +442,6 @@
                 // Clear the file input to allow selecting additional images
                 $(this).val('');
             });
-
             // Add click event listener to dynamically generated images
             $(document).on('click', '.img-preview', function() {
                 const src = $(this).attr('src');
