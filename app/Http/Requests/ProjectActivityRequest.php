@@ -32,10 +32,16 @@ class ProjectActivityRequest extends FormRequest
     public function messages()
     {
         return [
-            'project_id.required' => 'معرف المشروع مطلوب',
-            'project_id.integer' => 'معرف المشروع يجب أن يكون عددًا صحيحًا',
-            'activity_id.required' => 'معرف النشاط مطلوب',
-            'activity_id.integer' => 'معرف النشاط يجب أن يكون عددًا صحيحًا',
+//            'project_id.required' => 'معرف المشروع مطلوب',
+//            'project_id.integer' => 'معرف المشروع يجب أن يكون عددًا صحيحًا',
+//            'activity_id.required' => 'معرف النشاط مطلوب',
+//            'activity_id.integer' => 'معرف النشاط يجب أن يكون عددًا صحيحًا',
+
+            'project_id.required' => 'Project ID is required',
+            'project_id.integer' => 'Project ID must be an integer',
+            'activity_id.required' => 'Activity ID is required',
+            'activity_id.integer' => 'Activity ID must be an integer',
+
         ];
     }
 }

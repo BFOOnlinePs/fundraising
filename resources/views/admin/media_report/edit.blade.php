@@ -23,54 +23,109 @@
 @section('content')
     @include('alert_message.success')
     @include('alert_message.fail')
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ route('media_report.update') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $data->id }}">
+    <form action="{{ route('media_report.update') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="id" value="{{ $data->id }}">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Edit Media Report</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-5 border rounded p-4  text-center" id="main_photo_div">
+                                <div class="form-group">
+                                    <label for="">Choose a featured image</label>
+                                    <br>
+                                    @if(empty($data->main_photo))
+                                        <img style="width: 250px;font-size: 150px" class="fa fa-image" id="main_photo_img" alt="" src="">
+                                    @else
+                                        <img style="width: 250px" id="main_photo_img" src="{{ asset('storage/media_report/'.$data->main_photo) }}" alt="">
+                                    @endif
+                                    <input @if(empty($data->main_photo)) required @endif type="file" id="main_photo" name="main_photo" class="form-control" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="col-md-7 text-center">
+                                <h3>Edit Media Report</h3>
+                                <hr>
+                                <p>
+                                    can edit article through the following form, where you must enter all the required information for the article. It will be reviewed and published across electronic platforms.
+                                    <br>
+                                    <br>
+                                <div class="col-md-12">
+                                    <div class="form-group mt-2">
+                                        <label for="">Notes</label>
+                                        <textarea name="notes" id="" cols="30" rows="4" placeholder="Notes" class="form-control">{{ $data->notes }}</textarea>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h6>English Content</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Media Title</label>
+                                    <textarea required type="text" class="form-control" name="title_en" rows="3" placeholder="Media Title">{{ $data->title_en }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mt-2">
+                                    <label for="">Media Report</label>
+                                    <textarea required class="form-control" name="media_report_content_en" id="" cols="30" placeholder="Media Report" rows="6">{{ $data->media_report_content_en }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" dir="rtl">
+                        <h6>المحتوى بالعربية</h6>
+                        <hr>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">عنوان الخبر الاعلامي</label>
+                                <textarea  dir="rtl" type="text" class="form-control" name="title_ar" rows="3" placeholder="عنوان الخبر الاعلامي">{{ $data->title_ar }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mt-2">
+                                <label for="">المحتوى</label>
+                                <textarea required class="form-control" dir="rtl" name="media_report_content_ar" id="" cols="30" placeholder="المحتوى" rows="6">{{ $data->media_report_content_ar }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Project Information</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Arabic title</label>
-                                            <textarea type="text" dir="rtl" class="form-control" name="title_ar" rows="4" placeholder="ضع عنوان">{{ $data->title_ar }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">English title</label>
-                                            <textarea type="text" class="form-control" name="title_en" rows="4" placeholder="English title">{{ $data->title_en }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
-                                            <label for="">Arabic media report</label>
-                                            <textarea required class="form-control" dir="rtl" name="media_report_content_ar" id="" cols="30" placeholder="اكتب وصف" rows="2">{{ $data->media_report_content_ar }}</textarea>
-                                            {{--                                <div class="summernote" id="summernote">--}}
-
-                                            {{--                                </div>--}}
-                                            {{--                                <textarea name="" id="summernote" cols="30" rows="10"></textarea>--}}
-                                            {{--                                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--}}
-
-                                            {{--                                <script>--}}
-                                            {{--                                    $(document).ready(function() {--}}
-                                            {{--                                        $('#summernote').summernote();--}}
-                                            {{--                                    });--}}
-                                            {{--                                </script>--}}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
-                                            <label for="">English media report</label>
-                                            <textarea class="form-control" name="media_report_content_en" id="" cols="30" placeholder="English media report" rows="2">{{ $data->media_report_content_en }}</textarea>
-                                        </div>
-                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group mt-2">
                                             <label for="">Project</label>
+                                            ( <a href="{{ route('projects.add') }}">Add Project</a> )
                                             <select required class="form-control" onchange="get_activites_if_selected_project_ajax(this.value)" name="project_id" id="project_select">
                                                 <option value="">Select project ...</option>
                                                 @foreach($projects as $key)
@@ -87,44 +142,66 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
-                                            <label for="">Notes</label>
-                                            <textarea name="notes" id="" cols="30" rows="2" placeholder="Notes" class="form-control">{{ $data->notes }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group mt-2">
-                                                    <label for="">Attachment</label>
-                                                    <input @if(empty($data->main_photo)) required @endif type="file" class="form-control" id="image-input" name="images[]" multiple accept="image/*">
-                                                </div>
-                                                <div class="preview-container row" id="image-preview"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="form-group">
-                                    <label for="">Image</label>
-                                    <br>
-                                    @if(!empty($data->main_photo))
-                                        <img style="width: 200px" src="{{ asset('storage/media_report/'.$data->main_photo) }}" alt="">
-                                    @else
-                                        <p style="font-size: 100px"><span class="fa fa-image"></span></p>
-                                    @endif
-                                    <input type="file" name="main_photo" class="form-control">
                                 </div>
                             </div>
                         </div>
-                        <button class="mt-2 btn btn-success">Update</button>
-                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Add Photos and Pictures</h4>
+                    <br>
+                    <p>You can add images, which will be resized and uploaded to be suitable for publishing.</p>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="form-group mt-2">
+                            <label for="">Attachment</label>
+                            <input type="file" class="form-control" id="image-input" name="images[]" multiple accept="image/*">
+                        </div>
+                        <div class="preview-container row" id="image-preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Attach Other Files</h4>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="form-group mt-2">
+                            <label for="">Attachment</label>
+                            <input type="file" class="form-control" id="other_file_input" name="other_images[]" multiple>
+                        </div>
+                        <div class="preview-container row" id="other_file_preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button style="" type="submit" class="mt-2 btn btn-success">Save</button>
+    </form>
+
+    <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="" class="img-fluid" alt="Image Preview" id="preview-image">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
 @section('script')
 
@@ -135,6 +212,7 @@
         $(document).ready(function () {
             media_report_table_ajax();
             attachment_ajax({{ $data->id }});
+            list_other_image_ajax({{ $data->id }});
             get_activites_if_selected_project_ajax({{ $data->project_id }});
         });
         function media_report_table_ajax() {
@@ -216,8 +294,8 @@
 
                     reader.onload = function(e) {
                         loader.remove(); // Remove loader when loading is complete
-                        const removeBtn = $('<span>').addClass('remove-btn text-danger').html('&times;');
-                        const img = $('<img>').attr('src', e.target.result).attr('width', '250px').addClass('img-preview');
+                        const removeBtn = $('<p>').addClass('remove-btn text-danger').html('&times;');
+                        const img = $('<img>').attr('src', e.target.result).attr('width', '250px').addClass('img-preview img-fluid avatar-md rounded');
                         const previewItem = $('<div>').addClass('preview-item').addClass('col-md-3').append(removeBtn, img);
 
                         // Assign data attribute to remove button
@@ -253,11 +331,17 @@
 
             // Add click event listener to dynamically generated images
             $(document).on('click', '.img-preview', function() {
+                console.log($(this).attr('src'));
                 const src = $(this).attr('src');
                 $('#preview-image').attr('src', src);
                 $('#standard-modal').modal('show');
             });
         });
+
+        function get_image_path_for_modal(src) {
+            $('#preview-image').attr('src', src);
+            $('#standard-modal').modal('show');
+        }
 
 
         {{--$(document).ready(function() {--}}
@@ -372,6 +456,58 @@
                 }
             })
         }
+
+        function list_other_image_ajax(id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "POST",
+                url: "{{ route('media_report.list_other_image_ajax') }}",
+                datatype:'json',
+                data:{
+                    'id' : id
+                },
+                success:function(data){
+                    $('#other_file_preview').html(data.view);
+                },
+                error:function(){
+
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            $('#main_photo').change(function (e) {
+                var file = e.target.files[0];
+                if(file){
+                    $('#main_photo_img').attr({src:URL.createObjectURL(file),width:'250px'});
+                }
+            })
+        });
+        $(document).ready(function() {
+            var clickFlag = false;
+
+            // Attach click event handler to the div
+            $('#main_photo_div').click(function() {
+                if (!clickFlag) {
+                    clickFlag = true;
+                    // Trigger click on the file input
+                    $('#main_photo').click();
+                }
+            });
+
+            // Listen for changes in the file input
+            $('#main_photo').change(function() {
+                // Handle file selection here, if needed
+                var file = $(this).prop('files')[0];
+                // Reset the click flag
+                clickFlag = false;
+            });
+        });
+
     </script>
 
 @endsection

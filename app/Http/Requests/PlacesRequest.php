@@ -33,9 +33,14 @@ class PlacesRequest extends FormRequest
     public function messages()
     {
         return [
-            'place_name_ar.required' => 'حقل اسم المكان (بالعربية) مطلوب.',
-            'place_name_en.required' => 'حقل اسم المكان (بالإنجليزية) مطلوب.',
-            'place_description.required' => 'حقل وصف المكان مطلوب.',
+//            'place_name_ar.required' => 'حقل اسم المكان (بالعربية) مطلوب.',
+//            'place_name_en.required' => 'حقل اسم المكان (بالإنجليزية) مطلوب.',
+//            'place_description.required' => 'حقل وصف المكان مطلوب.',
+
+            'place_name_ar.required' => 'Place name (in Arabic) field is required.',
+            'place_name_en.required' => 'Place name (in English) field is required.',
+            'place_description.required' => 'Place description field is required.',
+
         ];
     }
 }

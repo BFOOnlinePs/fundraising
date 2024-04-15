@@ -70,39 +70,100 @@
             </ul>
         </div>
     @endif
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ route('media_report.create') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+    <form action="{{ route('media_report.create') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Add New Media Report</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-5 border rounded p-4  text-center" id="main_photo_div">
+                                <div class="form-group">
+                                    <label for="">Choose a featured image</label>
+                                    <br>
+                                    <img style="width: 250px;font-size: 150px" class="fa fa-image" id="main_photo_img" alt="" src="">
+                                    <input required type="file" id="main_photo" name="main_photo" class="form-control" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="col-md-7 text-center">
+                                <h3>Add Media Report</h3>
+                                <hr>
+                                <p>
+                                    can add a news article through the following form, where you must enter all the required information for the article. It will be reviewed and published across electronic platforms.
+                                    <br>
+                                    <br>
+                                <div class="col-md-12">
+                                    <div class="form-group mt-2">
+                                        <label for="">Notes</label>
+                                        <textarea name="notes" id="" cols="30" rows="4" placeholder="Notes" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h6>English Content</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Media Title</label>
+                                    <textarea required type="text" class="form-control" name="title_en" rows="3" placeholder="Media Title"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mt-2">
+                                    <label for="">Media Report</label>
+                                    <textarea required class="form-control" name="media_report_content_en" id="" cols="30" placeholder="Media Report" rows="6"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+            <div class="card">
+                <div class="card-body" dir="rtl">
+                    <h6>المحتوى بالعربية</h6>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">عنوان الخبر الاعلامي</label>
+                            <textarea  dir="rtl" type="text" class="form-control" name="title_ar" rows="3" placeholder="عنوان الخبر الاعلامي"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mt-2">
+                            <label for="">المحتوى</label>
+                            <textarea required class="form-control" dir="rtl" name="media_report_content_ar" id="" cols="30" placeholder="المحتوى" rows="6"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Project Information</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Arabic title</label>
-                                            <textarea  dir="rtl" type="text" class="form-control" name="title_ar" rows="4" placeholder="ضع عنوان"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">English title</label>
-                                            <textarea required type="text" class="form-control" name="title_en" rows="4" placeholder="English title"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
-                                            <label for="">Arabic media report</label>
-                                            <textarea required class="form-control" dir="rtl" name="media_report_content_ar" id="" cols="30" placeholder="اكتب وصف" rows="2"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
-                                            <label for="">English media report</label>
-                                            <textarea required class="form-control" name="media_report_content_en" id="" cols="30" placeholder="English media report" rows="2"></textarea>
-                                        </div>
-                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group mt-2">
                                             <label for="">Project</label>
@@ -123,35 +184,52 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
-                                            <label for="">Notes</label>
-                                            <textarea name="notes" id="" cols="30" rows="2" placeholder="Notes" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-2">
-                                            <label for="">Attachment</label>
-                                            <input type="file" class="form-control" id="image-input" name="images[]" multiple accept="image/*">
-                                        </div>
-                                        <div class="preview-container row" id="image-preview"></div>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <div class="form-group">
-                                    <label for="">Image</label>
-                                    <p style="font-size: 100px"><span class="fa fa-image"></span></p>
-                                    <input required type="file" name="main_photo" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="mt-2 btn btn-success">Save</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Add Photos and Pictures</h4>
+                    <br>
+                    <p>You can add images, which will be resized and uploaded to be suitable for publishing.</p>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="form-group mt-2">
+                            <label for="">Attachment</label>
+                            <input type="file" class="form-control" id="image-input" name="images[]" multiple accept="image/*">
+                        </div>
+                        <div class="preview-container row" id="image-preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Attach Other Files</h4>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="form-group mt-2">
+                            <label for="">Attachment</label>
+                            <input type="file" class="form-control" id="other_file_input" name="other_images[]" multiple>
+                        </div>
+                        <div class="preview-container row" id="other_file_preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button style="" type="submit" class="mt-2 btn btn-success">Save</button>
+    </form>
+
     <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -165,16 +243,45 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('script')
 
     <script src="{{ asset('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
-    media_report.get_activites_if_selected_project_ajax
     <script>
         $(document).ready(function () {
             media_report_table_ajax();
+
+        });
+
+        $(document).ready(function () {
+            $('#main_photo').change(function (e) {
+                var file = e.target.files[0];
+                if(file){
+                    $('#main_photo_img').attr({src:URL.createObjectURL(file),width:'250px'});
+                }
+            })
+        });
+
+        $(document).ready(function() {
+            var clickFlag = false;
+
+            // Attach click event handler to the div
+            $('#main_photo_div').click(function() {
+                if (!clickFlag) {
+                    clickFlag = true;
+                    // Trigger click on the file input
+                    $('#main_photo').click();
+                }
+            });
+
+            // Listen for changes in the file input
+            $('#main_photo').change(function() {
+                // Handle file selection here, if needed
+                var file = $(this).prop('files')[0];
+                // Reset the click flag
+                clickFlag = false;
+            });
         });
         function media_report_table_ajax() {
             $.ajaxSetup({
@@ -341,6 +448,27 @@
                 const src = $(this).attr('src');
                 $('#preview-image').attr('src', src);
                 $('#standard-modal').modal('show');
+            });
+        });
+
+        $(document).ready(function() {
+            $('#other_file_input').on('change', function() {
+                var files = $(this).get(0).files;
+                var previewContainer = $('#other_file_preview');
+
+                previewContainer.empty(); // Clear previous previews
+
+                if (files.length > 0) {
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        var fileName = file.name;
+                        var anchor = $('<a>').addClass('pdf-preview').attr('href', URL.createObjectURL(file)).attr('target', '_blank').text(fileName); // Link directly to the file
+                        var previewItem = $('<div>').addClass('col-md-3').append(anchor);
+                        previewContainer.append(previewItem);
+                    }
+                } else {
+                    previewContainer.html('<p>No files selected</p>');
+                }
             });
         });
     </script>

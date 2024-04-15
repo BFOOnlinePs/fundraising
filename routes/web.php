@@ -33,7 +33,7 @@ Route::group(['middleware'=>'auth'],function (){
         Route::get('edit/{id}',[App\Http\Controllers\UserController::class , 'edit'])->name('users.edit');
         Route::post('update',[App\Http\Controllers\UserController::class , 'update'])->name('users.update');
     });
-    Route::group(['prefix'=>'fundraising_unit'],function (){
+    Route::group(['prefix'=>'fundraising_unit','middleware'=>['role:1']],function (){
         Route::group(['prefix'=>'donors'],function (){
             Route::get('index',[App\Http\Controllers\DonorsController::class , 'index'])->name('fundraising_unit.donors.index');
             Route::post('donors_table_ajax',[App\Http\Controllers\DonorsController::class , 'donors_table_ajax'])->name('fundraising_unit.donors.donors_table_ajax');
@@ -98,6 +98,7 @@ Route::group(['middleware'=>'auth'],function (){
         Route::post('approved_media_report',[App\Http\Controllers\MediaReportController::class , 'approved_media_report'])->name('media_report.approved_media_report');
         Route::post('delete_image_ajax',[App\Http\Controllers\MediaReportController::class , 'delete_image_ajax'])->name('media_report.delete_image_ajax');
         Route::post('attachment_ajax',[App\Http\Controllers\MediaReportController::class , 'attachment_ajax'])->name('media_report.attachment_ajax');
+        Route::post('list_other_image_ajax',[App\Http\Controllers\MediaReportController::class , 'list_other_image_ajax'])->name('media_report.list_other_image_ajax');
         Route::post('get_activites_if_selected_project_ajax',[App\Http\Controllers\MediaReportController::class , 'get_activites_if_selected_project_ajax'])->name('media_report.get_activites_if_selected_project_ajax');
     });
     Route::group(['prefix'=>'projects'],function (){

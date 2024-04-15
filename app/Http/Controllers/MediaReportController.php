@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MediaReportRequest;
 use App\Models\ActivityModel;
 use App\Models\AttachmentModel;
+use App\Models\MediaReportAttachmentModel;
 use App\Models\MediaReportModel;
 use App\Models\ProjectActivityModel;
 use App\Models\ProjectsModel;
@@ -83,6 +84,20 @@ class MediaReportController extends Controller
                     $attachment->save();
                 }
             }
+            if ($request->hasFile('other_images')) {
+                foreach ($request->file('other_images') as $image) {
+                    $attachment = new MediaReportAttachmentModel();
+                    $extension = $image->getClientOriginalExtension();
+                    $filename = time() . '_' . rand(1000,9999) . '.' . $extension;
+
+                    // Store the resized image
+                    $image->storeAs('media_report', $filename, 'public');
+
+                    $attachment->media_report_id = $data->id; // Assuming there's a foreign key relationship
+                    $attachment->file = $filename;
+                    $attachment->save();
+                }
+            }
 
             return redirect()->route('media_report.index')->with(['success' => 'تم اضافة التقرير بنجاح']);
         } else {
@@ -131,7 +146,22 @@ class MediaReportController extends Controller
                     $attachment = new AttachmentModel();
                     $extension = $image->getClientOriginalExtension();
                     $filename = time() . '_' . rand(1000,9999) . '.' . $extension;
-                    $image->storeAs('attachments', $filename, 'public');
+                    $image->storeAs('media_report', $filename, 'public');
+                    $attachment->media_report_id = $data->id; // Assuming there's a foreign key relationship
+                    $attachment->file = $filename;
+                    $attachment->save();
+                }
+            }
+
+            if ($request->hasFile('other_images')) {
+                foreach ($request->file('other_images') as $image) {
+                    $attachment = new MediaReportAttachmentModel();
+                    $extension = $image->getClientOriginalExtension();
+                    $filename = time() . '_' . rand(1000,9999) . '.' . $extension;
+
+                    // Store the resized image
+                    $image->storeAs('media_report', $filename, 'public');
+
                     $attachment->media_report_id = $data->id; // Assuming there's a foreign key relationship
                     $attachment->file = $filename;
                     $attachment->save();
@@ -200,6 +230,19 @@ class MediaReportController extends Controller
         return response()->json([
             'success' => 'true',
             'data' => $data
+        ]);
+    }
+
+    public function list_other_image_ajax(Request $request){
+        $data = MediaReportAttachmentModel::where('media_report_id',$request->id)->get();
+        foreach ($data as $item) {
+            $item->filename_with_extension = $item->file; // Store the original file name with extension
+            $item->file = pathinfo($item->file, PATHINFO_FILENAME); // Store only the filename
+            $item->extension = pathinfo($item->filename_with_extension, PATHINFO_EXTENSION); // Store the file extension
+        }
+        return response()->json([
+            'success' => 'true',
+            'view' => view('admin.media_report.ajax.list_other_image_ajax',['data'=>$data])->render()
         ]);
     }
 }

@@ -15,10 +15,11 @@
     @endif
     <div class="row">
         <div class="col-md-12 d-flex justify-content-around">
-            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project Info</a>
-            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project location</a>
-            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project Activity</a>
-            <a style="width: 150px;height: 65px" class="btn bg-info d-flex justify-content-center align-items-center">Project Beneficiary</a>
+            <a style="width: 150px;height: 65px" class="btn bg-success-subtle d-flex justify-content-center align-items-center">Info</a>
+            <a style="width: 150px;height: 65px" class="btn bg-success-subtle d-flex justify-content-center align-items-center">Location</a>
+            <a style="width: 150px;height: 65px" class="btn bg-success-subtle d-flex justify-content-center align-items-center">Activity</a>
+            <a style="width: 150px;height: 65px" class="btn bg-success d-flex justify-content-center align-items-center">Beneficiary</a>
+            <a style="width: 150px;height: 65px" class="btn bg-success-subtle d-flex justify-content-center align-items-center">Donors</a>
         </div>
     </div>
     <div class="row mt-2">
@@ -99,15 +100,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="">Budget</label>
-                                    @error('budget')
-                                    (<span class="text-danger">{{ $message }}</span>)
-                                    @enderror
-                                    <input type="text" value="{{ old('budget') }}" name="budget" class="form-control" placeholder="Budget">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
                                     <label for="">Beneficiary type</label>
                                     ( <a href="{{ route('settings.type_of_beneficiaries.add') }}">Add Beneficiary</a> )
                                     @error('beneficiary_id')
@@ -119,6 +111,15 @@
                                             <option @if(old('beneficiary_id') == $key->id) selected @endif value="{{ $key->id }}">{{ $key->type_name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="">Budget</label>
+                                    @error('budget')
+                                    (<span class="text-danger">{{ $message }}</span>)
+                                    @enderror
+                                    <input type="text" value="{{ old('budget') }}" name="budget" class="form-control" placeholder="Budget">
                                 </div>
                             </div>
                             <div class="col-md-6">

@@ -33,9 +33,14 @@ class CitesRequest extends FormRequest
     public function messages()
     {
         return [
-            'city_name_ar.required' => 'حقل اسم المدينة (بالعربية) مطلوب.',
-            'city_name_en.required' => 'حقل اسم المدينة (بالإنجليزية) مطلوب.',
-            'city_description.required' => 'حقل وصف المدينة (بالإنجليزية) مطلوب.',
+//            'city_name_ar.required' => 'حقل اسم المدينة (بالعربية) مطلوب.',
+//            'city_name_en.required' => 'حقل اسم المدينة (بالإنجليزية) مطلوب.',
+//            'city_description.required' => 'حقل وصف المدينة (بالإنجليزية) مطلوب.',
+
+            'city_name_ar.required' => 'City name (in Arabic) field is required.',
+            'city_name_en.required' => 'City name (in English) field is required.',
+            'city_description.required' => 'City description (in English) field is required.',
+
         ];
     }
 }
