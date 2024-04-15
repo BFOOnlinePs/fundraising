@@ -84,7 +84,7 @@
     <!-- Page Wrapper -->
     @include('layouts.content')
     <!-- /Page Wrapper -->
-
+    @include('modals.preview_attachment_modal')
 </div>
 <!-- /Main Wrapper -->
 
@@ -441,6 +441,11 @@
 
 @yield('script')
 
-
+<script>
+    function view_attachment_modal(url) {
+        $('#view_attachment_result').attr('src', url);
+        $('#preview_attachment_modal').modal('show');
+    }
+</script>
 </body>
 </html>

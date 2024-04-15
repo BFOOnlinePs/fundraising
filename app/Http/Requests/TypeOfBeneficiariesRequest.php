@@ -31,7 +31,8 @@ class TypeOfBeneficiariesRequest extends FormRequest
     public function messages()
     {
         return [
-            'type_name.required' => 'حقل نوع المستفيد مطلوب'
+//            'type_name.required' => 'حقل نوع المستفيد مطلوب'
+            'type_name.required' => 'Beneficiary type field is required',
         ];
     }
 }
