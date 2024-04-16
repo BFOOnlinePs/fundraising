@@ -22,9 +22,9 @@
             @foreach($data as $key)
                 <tr>
                     <td>{{ $key->reference_number }}</td>
-                    <td>{{ $key->project_name_ar }}</td>
-                    <td>{{ $key->project_name_en }}</td>
-                    <td>{{ $key->project_drscription }}</td>
+                    <td style="white-space:pre-wrap;word-wrap:break-word;">{{ $key->project_name_ar }}</td>
+                    <td style="white-space:pre-wrap;word-wrap:break-word;">{{ $key->project_name_en }}</td>
+                    <td style="white-space:pre-wrap;word-wrap:break-word;">{{ $key->project_drscription }}</td>
                     <td>{{ $key->planned_start_date }}</td>
                     <td>{{ $key->planned_end_date }}</td>
                     <td>{{ $key->budget }}</td>
