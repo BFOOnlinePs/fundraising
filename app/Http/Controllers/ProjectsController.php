@@ -15,7 +15,7 @@ class ProjectsController extends Controller
     }
 
     public function project_table_ajax(Request $request){
-        $data = ProjectsModel::get();
+        $data = ProjectsModel::paginate(15);
         return response()->json([
             'success' => 'true',
             'view' => view('admin.projects.ajax.project_table_ajax',['data'=>$data])->render()

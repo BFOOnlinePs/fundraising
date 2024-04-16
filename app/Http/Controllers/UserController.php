@@ -13,7 +13,9 @@ class UserController extends Controller
     }
 
     public function users_table_ajax(Request $request){
-        $data = User::where('name','like','%'.$request->search.'%')->get();
+        $data = User::where(function ($query) use ($request){
+            $query->where('name','like','%'.$request->search.'%')->orWhere('email','like','%'.$request->search.'%');
+        })->paginate(15);
         return response()->json([
             'success' => 'true',
             'view' => view('admin.users.ajax.users_table_ajax',['data'=>$data])->render()

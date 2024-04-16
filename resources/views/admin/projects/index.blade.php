@@ -26,8 +26,14 @@
     <script>
         $(document).ready(function () {
             project_table_ajax();
+
+            $(document).on('click', '.pagination a', function(event) {
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                project_table_ajax(page);
+            });
         });
-        function project_table_ajax() {
+        function project_table_ajax(page) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -38,7 +44,8 @@
                 url: "{{ route('projects.project_table_ajax') }}",
                 datatype:'json',
                 data:{
-                    'search' : $('#search_input').val()
+                    'search' : $('#search_input').val(),
+                    'page' : page
                 },
                 success:function(data){
                     if(data.success == 'true'){

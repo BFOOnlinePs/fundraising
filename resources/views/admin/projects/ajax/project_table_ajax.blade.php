@@ -39,3 +39,4 @@
         @endif
     </tbody>
 </table>
+{{ $data->links() }}

@@ -30,7 +30,14 @@ class MediaReportController extends Controller
         if (auth()->user()->user_role == 3){
             $query->where('user_id',auth()->user()->id);
         }
-        $data = $query->get();
+
+        if ($request->filled('search')){
+            $query->where(function ($query) use ($request){
+                $query->where('title_ar','like','%'.$request->search.'%')->orWhere('title_en','like','%'.$request->search.'%');
+            });
+        }
+
+        $data = $query->paginate(15);
         return response()->json([
             'success' => 'true',
             'view' => view('admin.media_report.ajax.media_report_table_ajax',['data'=>$data])->render()
