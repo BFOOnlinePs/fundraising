@@ -479,6 +479,30 @@
             })
         }
 
+        function delete_other_attachment_ajax(id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "POST",
+                url: "{{ route('media_report.delete_other_attachment_ajax') }}",
+                datatype:'json',
+                data:{
+                    'id' : id
+                },
+                success:function(data){
+                    if(data.success === 'true'){
+                        $('#media_report_attachment_'+id).remove();
+                    }
+                },
+                error:function(){
+
+                }
+            })
+        }
+
         $(document).ready(function () {
             $('#main_photo').change(function (e) {
                 var file = e.target.files[0];
