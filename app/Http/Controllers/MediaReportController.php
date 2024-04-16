@@ -245,4 +245,13 @@ class MediaReportController extends Controller
             'view' => view('admin.media_report.ajax.list_other_image_ajax',['data'=>$data])->render()
         ]);
     }
+
+    public function delete_other_attachment_ajax(Request $request){
+        $data = MediaReportAttachmentModel::where('id',$request->id)->first();
+        if ($data->delete()){
+            return response()->json([
+                'success' => 'true'
+            ]);
+        }
+    }
 }

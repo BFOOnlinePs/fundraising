@@ -100,6 +100,7 @@ Route::group(['middleware'=>'auth'],function (){
         Route::post('attachment_ajax',[App\Http\Controllers\MediaReportController::class , 'attachment_ajax'])->name('media_report.attachment_ajax');
         Route::post('list_other_image_ajax',[App\Http\Controllers\MediaReportController::class , 'list_other_image_ajax'])->name('media_report.list_other_image_ajax');
         Route::post('get_activites_if_selected_project_ajax',[App\Http\Controllers\MediaReportController::class , 'get_activites_if_selected_project_ajax'])->name('media_report.get_activites_if_selected_project_ajax');
+        Route::post('delete_other_attachment_ajax',[App\Http\Controllers\MediaReportController::class , 'delete_other_attachment_ajax'])->name('media_report.delete_other_attachment_ajax');
     });
     Route::group(['prefix'=>'projects'],function (){
         Route::get('index',[App\Http\Controllers\ProjectsController::class , 'index'])->name('projects.index');
