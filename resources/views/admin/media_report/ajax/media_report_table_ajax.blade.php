@@ -14,8 +14,8 @@
         @else
             @foreach($data as $key)
                 <tr>
-                    <td class="col-md-3" scope="row">{{ $key->title_ar }}</td>
-                    <td class="col-md-3" scope="row">{{ $key->title_en }}</td>
+                    <td style="white-space:pre-wrap;word-wrap:break-word;" class="col-md-3" scope="row">{{ $key->title_ar }}</td>
+                    <td style="white-space:pre-wrap;word-wrap:break-word;" class="col-md-3" scope="row">{{ $key->title_en }}</td>
                     <td class="col-md-2" scope="row">
                         @if(auth()->user()->user_role == 1)
                             <a href="{{ route('media_report.edit',['id'=>$key->id]) }}" class="btn btn-dark btn-sm"><span class="fa fa-edit"></span></a>

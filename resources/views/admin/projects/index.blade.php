@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('style')
+
 @endsection
 @section('content')
     @include('alert_message.success')
@@ -13,8 +14,12 @@
                 </div>
                 <div class="card-body">
                     <div class="row mt-2">
-                        <div id="project_table_ajax">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <div id="project_table_ajax">
 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
