@@ -14,7 +14,7 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-grid"></i> <span> Fundraising unit</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-user"></i> <span> Fundraising unit</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a class="@if(request()->routeIs('fundraising_unit.donors.*')) active @endif" href="{{ route('fundraising_unit.donors.index') }}">Donors</a></li>
                             <li><a href="calendar.html">Calls</a></li>
@@ -23,20 +23,20 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-grid"></i> <span> Team</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-users"></i> <span> Team</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a class="@if(request()->routeIs('users.*')) active @endif" href="{{ route('users.index') }}">All Staff</a></li>
                             <li><a href="calendar.html">Staff groups</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-grid"></i> <span> Media Report</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-book"></i> <span> Media Report</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a class="@if(request()->routeIs('media_report.*')) active @endif" href="{{ route('media_report.index') }}">Media Report</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-grid"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-monitor"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a class="@if(request()->routeIs('projects.*')) active @endif" href="{{ route('projects.index') }}">Projects</a></li>
                             <li><a class="@if(request()->routeIs('activity.*')) active @endif" href="{{ route('activity.index') }}">Activity</a></li>
@@ -44,7 +44,7 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-grid"></i> <span> Settings</span> <span class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-settings"></i> <span> Settings</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a class="@if(request()->routeIs('settings.region.*')) active @endif" href="{{ route('settings.region.index') }}">Region</a></li>
                             <li><a class="@if(request()->routeIs('settings.cites.*')) active @endif" href="{{ route('settings.cites.index') }}">Cites</a></li>

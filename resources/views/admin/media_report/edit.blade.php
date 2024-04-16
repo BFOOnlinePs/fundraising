@@ -23,7 +23,7 @@
 @section('content')
     @include('alert_message.success')
     @include('alert_message.fail')
-    <form action="{{ route('media_report.update') }}" method="post" enctype="multipart/form-data">
+    <form id="media_report_form" action="{{ route('media_report.update') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{ $data->id }}">
         <div class="row">
@@ -64,6 +64,13 @@
                                     </div>
                                 </div>
                                 </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3">
+                                @if(!empty($data->main_photo))
+                                    <a href="{{ asset('storage/media_report/'.$data->main_photo) }}" download="{{ $data->main_photo }}" class="btn btn-success">Download Main Photo</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -185,23 +192,26 @@
                 </div>
             </div>
         </div>
-        <button style="" type="submit" class="mt-2 btn btn-success">Save</button>
+        <button style="" type="submit" class="mt-2 btn btn-success">Update</button>
     </form>
 
     <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
                             <img src="" class="img-fluid" alt="Image Preview" id="preview-image">
                         </div>
+                        <div class="col-md-3">
+                            <a href="" type="button" id="image_modal_download" class="btn btn-success">Download Image</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+@include('admin.media_report.modals.loader_modal')
 @endsection
 @section('script')
 
@@ -339,78 +349,19 @@
         });
 
         function get_image_path_for_modal(src) {
+            // Get the filename from the URL
+            const filename = src.substring(src.lastIndexOf('/') + 1);
+
+            // Get the extension from the filename
+            const extension = filename.substring(filename.lastIndexOf('.') + 1);
+
             $('#preview-image').attr('src', src);
+            $('#image_modal_download').attr({
+                'download': `${filename}`,
+                'href': src
+            });
             $('#standard-modal').modal('show');
         }
-
-
-        {{--$(document).ready(function() {--}}
-        {{--    // Storing existing attachments--}}
-        {{--    const existingAttachments = {!! json_encode($attachments) !!};--}}
-        {{--    const previewContainer = $('#image-preview');--}}
-
-        {{--    existingAttachments.forEach(function(attachment, index) {--}}
-        {{--        displayAttachment(attachment, index);--}}
-        {{--    });--}}
-
-        {{--    function displayAttachment(attachment, index) {--}}
-        {{--        const removeBtn = $('<span>').addClass('remove-btn text-danger').html('&times;');--}}
-        {{--        const imgSrc = '<?= asset("storage/attachments/") ?>' + '/' + attachment.file;--}}
-        {{--        const img = $('<img>').attr('src', imgSrc).attr('width','250px');--}}
-        {{--        const previewItem = $('<div>').addClass('preview-item').addClass('col-md-3').append(removeBtn, img);--}}
-
-        {{--        $(removeBtn).attr('data-index', index);--}}
-
-        {{--        removeBtn.on('click', function() {--}}
-        {{--            const imageId = attachment.id; // Assuming attachment has an 'id' property--}}
-        {{--            const deletedImagesInput = $('<input>').attr('type', 'hidden').attr('name', 'deleted_images[]').val(imageId);--}}
-        {{--            $(this).closest('.preview-item').append(deletedImagesInput);--}}
-        {{--            $(this).closest('.preview-item').remove();--}}
-        {{--        });--}}
-
-        {{--        previewContainer.append(previewItem);--}}
-        {{--    }--}}
-
-        {{--    // Handling new image uploads--}}
-        {{--    $('#image-input').on('change', function() {--}}
-        {{--        const files = $(this)[0].files;--}}
-
-        {{--        if (files.length === 0) {--}}
-        {{--            console.log('No files selected.');--}}
-        {{--            return; // No files selected, exit the function--}}
-        {{--        }--}}
-
-        {{--        const newImages = [];--}}
-
-        {{--        for (let i = 0; i < files.length; i++) {--}}
-        {{--            const file = files[i];--}}
-        {{--            const reader = new FileReader();--}}
-
-        {{--            reader.onload = function(e) {--}}
-        {{--                const imgData = e.target.result;--}}
-        {{--                newImages.push(imgData);--}}
-        {{--                displayNewImage(imgData);--}}
-        {{--            };--}}
-
-        {{--            reader.readAsDataURL(file);--}}
-        {{--        }--}}
-
-        {{--        // Store new images array somewhere or send it to the controller--}}
-        {{--        console.log(newImages);--}}
-        {{--    });--}}
-
-        {{--    function displayNewImage(imageData) {--}}
-        //         const removeBtn = $('<span>').addClass('remove-btn text-danger').html('&times;');
-        //         const img = $('<img>').attr('src', imageData).attr('width','250px');
-        //         const previewItem = $('<div>').addClass('preview-item').addClass('col-md-3').append(removeBtn, img);
-
-        {{--        removeBtn.on('click', function() {--}}
-        {{--            $(this).closest('.preview-item').remove();--}}
-        {{--        });--}}
-
-        {{--        previewContainer.append(previewItem);--}}
-        {{--    }--}}
-        {{--});--}}
 
 
         function delete_image_ajax(id) {
@@ -531,6 +482,31 @@
                 clickFlag = false;
             });
         });
+
+
+            $('#media_report_form').submit(function (e) {
+                e.preventDefault();
+                var form_id = $(this).attr('id');
+                $('#loader_modal').modal('show');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: "POST",
+                    url: "{{ route('media_report.update') }}",
+                    datatype:'json',
+                    data:$(this).serialize(),
+                    success:function(response){
+                        $('#media_report_form').off('submit').submit();
+                    },
+                    error:function(){
+
+                    }
+                })
+            });
 
     </script>
 

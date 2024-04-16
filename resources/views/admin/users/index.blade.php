@@ -12,8 +12,13 @@
                 </div>
                 <div class="card-body">
                     <div class="row mt-2">
-                        <div id="users_table_ajax">
+                        <div class="col-md-12 mb-2">
+                            <input type="text" onkeyup="users_table_ajax()" placeholder="Name or Email" class="form-control" id="search_input">
+                        </div>
+                        <div class="col-md-12">
+                            <div id="users_table_ajax">
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -26,8 +31,14 @@
     <script>
         $(document).ready(function () {
             users_table_ajax();
+
+            $(document).on('click', '.pagination a', function(event) {
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                users_table_ajax(page);
+            });
         });
-        function users_table_ajax() {
+        function users_table_ajax(page) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -39,7 +50,8 @@
                 url: "{{ route('users.users_table_ajax') }}",
                 datatype:'json',
                 data:{
-                    'search' : $('#search_input').val()
+                    'search' : $('#search_input').val(),
+                    'page' : page
                 },
                 success:function(data){
                     $('#users_table_ajax').html(data.view);

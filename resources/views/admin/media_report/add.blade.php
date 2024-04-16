@@ -70,7 +70,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('media_report.create') }}" method="post" enctype="multipart/form-data">
+    <form id="media_report_form" action="{{ route('media_report.create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12">
@@ -89,7 +89,7 @@
                                     <label for="">Choose a featured image</label>
                                     <br>
                                     <img style="width: 250px;font-size: 150px" class="fa fa-image" id="main_photo_img" alt="" src="">
-                                    <input required type="file" id="main_photo" name="main_photo" class="form-control" style="display: none;">
+                                    <input required type="file" id="main_photo" name="main_photo" style="display: none;">
                                 </div>
                             </div>
                             <div class="col-md-7 text-center">
@@ -243,6 +243,7 @@
             </div>
         </div>
     </div>
+    @include('admin.media_report.modals.loader_modal')
 @endsection
 @section('script')
 
@@ -469,6 +470,30 @@
                     previewContainer.html('<p>No files selected</p>');
                 }
             });
+        });
+
+            $('#media_report_form').submit(function (e) {
+                e.preventDefault();
+                var form_id = $(this).attr('id');
+                $('#loader_modal').modal('show');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: "POST",
+                    url: "{{ route('media_report.create') }}",
+                    datatype:'json',
+                    data:$(this).serialize(),
+                    success:function(response){
+                        $('#media_report_form').off('submit').submit();
+                    },
+                    error:function(){
+
+                    }
+                })
         });
     </script>
 @endsection
