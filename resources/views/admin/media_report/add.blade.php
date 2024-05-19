@@ -511,4 +511,56 @@
                 })
         });
     </script>
+
+    <script>
+        function uploadImages() {
+            const files = document.getElementById('imageInput').files;
+            const formData = new FormData();
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = 800; // Adjust the desired width
+                        canvas.height = canvas.width * (img.height / img.width);
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        canvas.toBlob(function(blob) {
+                            formData.append('images[]', blob, file.name);
+                            if (formData.getAll('images[]').length === files.length) {
+                                // Upload formData to server
+                                uploadToServer(formData);
+                            }
+                        }, 'image/jpeg', 0.75); // Adjust the image quality here
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function uploadToServer(formData) {
+            // Perform AJAX request to upload formData to the server
+            // Example using Fetch API:
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Images uploaded successfully!');
+                    } else {
+                        console.error('Failed to upload images:', response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
 @endsection
