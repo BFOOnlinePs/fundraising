@@ -91,20 +91,6 @@ class MediaReportController extends Controller
                     $attachment->save();
                 }
             }
-            if ($request->hasFile('other_images')) {
-                foreach ($request->file('other_images') as $image) {
-                    $attachment = new MediaReportAttachmentModel();
-                    $extension = $image->getClientOriginalExtension();
-                    $filename = time() . '_' . rand(1000,9999) . '.' . $extension;
-
-                    // Store the resized image
-                    $image->storeAs('media_report', $filename, 'public');
-
-                    $attachment->media_report_id = $data->id; // Assuming there's a foreign key relationship
-                    $attachment->file = $filename;
-                    $attachment->save();
-                }
-            }
 
             return redirect()->route('media_report.index')->with(['success' => 'تم اضافة التقرير بنجاح']);
         } else {
