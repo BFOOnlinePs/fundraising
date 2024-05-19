@@ -1,10 +1,8 @@
 @extends('layouts.app')
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
-@endsection
-@section('style')
-    <style>
 
+    <style>
         .loader {
             border: 4px solid #f3f3f3;
             border-radius: 50%;
@@ -247,8 +245,12 @@
 @endsection
 @section('script')
 
+    <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/fileupload/fileupload.min.js') }}" type="b0923ff1d95edb54a4592ec0-text/javascript"></script>
+    <script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}" type="b0923ff1d95edb54a4592ec0-text/javascript"></script>
+
     <script>
         $(document).ready(function () {
             media_report_table_ajax();
@@ -268,20 +270,33 @@
             var clickFlag = false;
 
             // Attach click event handler to the div
-            $('#main_photo_div').click(function() {
-                if (!clickFlag) {
-                    clickFlag = true;
-                    // Trigger click on the file input
-                    $('#main_photo').click();
+            // $('#main_photo_div').click(function() {
+            //     if (!clickFlag) {
+            //         clickFlag = true;
+            //         // Trigger click on the file input
+            //         $('#main_photo').click();
+            //     }
+            // });
+            //
+            // // Listen for changes in the file input
+            // $('#main_photo').change(function() {
+            //     // Handle file selection here, if needed
+            //     var file = $(this).prop('files')[0];
+            //     // Reset the click flag
+            //     clickFlag = false;
+            // });
+
+            // Listen for changes in the file input
+            $('#main_photo').change(function(e) {
+                var file = e.target.files[0];
+                if (file) {
+                    $('#main_photo_img').attr({src: URL.createObjectURL(file), width: '250px'});
                 }
             });
 
-            // Listen for changes in the file input
-            $('#main_photo').change(function() {
-                // Handle file selection here, if needed
-                var file = $(this).prop('files')[0];
-                // Reset the click flag
-                clickFlag = false;
+            $('#main_photo_img').click(function() {
+                // Trigger click on the file input
+                $('#main_photo').click();
             });
         });
         function media_report_table_ajax() {
