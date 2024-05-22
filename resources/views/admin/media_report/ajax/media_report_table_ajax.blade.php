@@ -3,6 +3,7 @@
         <tr>
             <th>Ar title</th>
             <th style="width: 40%">En title</th>
+            <th style="width: 40%">Added By</th>
             <th style="width: 20%">Operation</th>
         </tr>
     </thead>
@@ -16,6 +17,7 @@
                 <tr>
                     <td style="white-space:pre-wrap;word-wrap:break-word;" class="col-md-3" scope="row">{{ $key->title_ar }}</td>
                     <td style="white-space:pre-wrap;word-wrap:break-word;" class="col-md-3" scope="row">{{ $key->title_en }}</td>
+                    <td style="white-space:pre-wrap;word-wrap:break-word;" class="col-md-3" scope="row">{{ $key->user->name ?? '' }}</td>
                     <td class="col-md-2" scope="row">
                         @if(auth()->user()->user_role == 1)
                             <a href="{{ route('media_report.edit',['id'=>$key->id]) }}" class="btn btn-dark btn-sm"><span class="fa fa-edit"></span></a>

@@ -38,6 +38,9 @@ class MediaReportController extends Controller
         }
 
         $data = $query->paginate(15);
+        foreach ($data as $key){
+            $key->user = User::where('id',$key->user_id)->first();
+        }
         return response()->json([
             'success' => 'true',
             'view' => view('admin.media_report.ajax.media_report_table_ajax',['data'=>$data])->render()
