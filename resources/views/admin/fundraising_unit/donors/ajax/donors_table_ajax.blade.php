@@ -71,7 +71,7 @@
         $('#send-email').click(function() {
             var emails = [];
             $('.checkbox:checked').each(function() {
-                var email = $(this).closest('tr').find('td:eq(3)').text(); // Assuming Email is the 4th column
+                var email = $(this).closest('tr').find('td:eq(3)').text();
                 emails.push(email.trim());
             });
             var mailtoLink = 'mailto:' + emails.join(';');

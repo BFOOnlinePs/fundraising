@@ -33,7 +33,7 @@
                                         @foreach($data as $key)
                                             <tr>
                                                 <td>{{ $key->project->project_name_en }}</td>
-                                                <td>{{ $key->activity->activity_name_en }}</td>
+                                                <td>{{ $key->activity->activity_name_en ?? '' }}</td>
                                                 <td>{{ $key->user->name }}</td>
                                                 <td>{{ $key->insert_at }}</td>
                                                 <td>
